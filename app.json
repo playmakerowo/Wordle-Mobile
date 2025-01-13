@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "wordle",
+    "name": "Palabras",
     "slug": "wordle",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,10 +19,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.playmakerowo.wordle"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9082077d-7582-4b75-9a5a-28eafb4883ef"
+      }
     }
   }
 }

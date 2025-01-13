@@ -63,7 +63,6 @@ export function Main() {
       setCurrentWord("");
 
       if (currentWord === correctWord) {
-        alert("¡Has ganado!");
         setOpenModal(true);
         setModalText("¡Has ganado!");
       } else if (attempts.length === maxAttempts - 1) {
