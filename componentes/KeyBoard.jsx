@@ -1,45 +1,39 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-export function KeyBoard({ onPressLetter, onPressDeleteLetter, onPressEnter }) {
+export function KeyBoard({
+  onPressLetter,
+  onPressDeleteLetter,
+  onPressEnter,
+  incorrectLetters,
+}) {
   const lettersRow1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
-  const lettersRow2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ"];
+  const lettersRow2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
   const lettersRow3 = ["Z", "X", "C", "V", "B", "N", "M"];
-
+  
+  const rows = [lettersRow1, lettersRow2, lettersRow3];
   return (
     <View style={styles.keyboard}>
-      <View style={styles.row}>
-        {lettersRow1.map((letter, index) => (
-          <TouchableOpacity
-            key={`row1-${index}`}
-            style={styles.button}
-            onPress={() => onPressLetter(letter)}
-          >
-            <Text>{letter}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <View style={styles.row}>
-        {lettersRow2.map((letter, index) => (
-          <TouchableOpacity
-            key={`row1-${index}`}
-            style={styles.button}
-            onPress={() => onPressLetter(letter)}
-          >
-            <Text>{letter}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <View style={styles.row}>
-        {lettersRow3.map((letter, index) => (
-          <TouchableOpacity
-            key={`row1-${index}`}
-            style={styles.button}
-            onPress={() => onPressLetter(letter)}
-          >
-            <Text>{letter}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
+      {rows.map((row, rowIndex) => (
+        <View style={styles.row} key={`row-${rowIndex}`}>
+          {row.map((letter, index) => {
+            const isIncorrect = incorrectLetters.includes(letter);
+            return (
+              <TouchableOpacity
+                key={`letter-${rowIndex}-${index}`}
+                style={[
+                  styles.button,
+                  isIncorrect ? { backgroundColor: "gray" } : {},
+                ]}
+                onPress={() => !isIncorrect && onPressLetter(letter)}
+                disabled={isIncorrect}
+              >
+                <Text>{letter}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      ))}
+
       <View style={styles.row}>
         <TouchableOpacity
           style={styles.buttonWide}
@@ -63,7 +57,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#DDDDDD",
     justifyContent: "center",
-    width: 29,
+    width: 30,
     height: 40,
     margin: 3,
     borderRadius: 5,
